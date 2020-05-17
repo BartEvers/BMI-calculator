@@ -3,6 +3,7 @@
 var weightInKg = parseInt(process.argv[2]);
 var heightInM = parseFloat(process.argv[3]);
 var age = parseInt(process.argv[4]);
+var dailyExercise = process.argv[5];
 
 // The formula for BMI is: weight (kg) / (height (m) x height (m))
 var BMI = weightInKg / (heightInM * heightInM);
@@ -16,7 +17,17 @@ var heightInCm = heightInM * 100;
 var BMR = 10 * weightInKg + 6.25 * heightInCm - 5 * age;
 
 // Assumption: calories for a normal lifestyle is BMR * 1.4
-var dailyCalories = BMR * 1.4;
+// Assumption: calories for a active lifestyle is BMR * 1.6
+
+// Declaring a variable, but not assigning it yet, the value will depend on wether someone exercises!
+var dailyCalories;
+
+if (dailyExercise === "yes") {
+  // assigning dailyCalories a value now that we've checked the condition
+  dailyCalories = BMR * 1.6;
+} else {
+  dailyCalories = BMR * 1.4;
+}
 
 // Assumption: This app is built for people who weigh too much
 var weightToLoseKg = weightInKg - idealWeightKg;
@@ -28,33 +39,25 @@ var dietWeeks = weightToLoseKg / 0.5;
 var dietCalories = dailyCalories - 500;
 
 console.log(`
-	
 **************
 BMI CALCULATOR
 **************
-
 age: ${age} years
 height: ${heightInM} m
 weight: ${weightInKg} kg
-
+do you exercise daily? ${dailyExercise}
 ****************
 FACING THE FACTS
 ****************
-
 Your BMI is ${Math.round(BMI)}
-
 A BMI under 18.5 is considered underweight
 A BMI above 25 is considered overweight
-
 Your ideal weight is ${Math.round(idealWeightKg)} kg
 With a normal lifestyle you burn ${Math.round(dailyCalories)} calories a day
-
 **********
 DIET PLAN
 **********
-
 If you want to reach your ideal weight of ${Math.round(idealWeightKg)} kg:
-
 Eat ${Math.round(dietCalories)} calories a day
 For ${Math.round(dietWeeks)} weeks
 `);

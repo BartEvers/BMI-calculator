@@ -1,10 +1,73 @@
-// console.log("What does process.argv contain?", process.argv);
+if (process.argv.length !== 7) {
+  console.log(`
+    You gave ${process.argv.length - 2} arguments(s) to the program
+    Please provide 5 arguments for
+    
+    weight (kg), 
+    height (m), 
+    age, 
+    wether you exercise daily (yes or no)
+    and your gender (m or f)
+    
+    Example:
+    $ node index.js 82 1.79 32 yes m
+  `);
+
+  process.exit();
+}
 
 var weightInKg = parseInt(process.argv[2]);
 var heightInM = parseFloat(process.argv[3]);
 var age = parseInt(process.argv[4]);
 var dailyExercise = process.argv[5];
 var gender = process.argv[6];
+
+// Check if weight OR height Or age is not a number (NaN)
+if (isNaN(weightInKg) || isNaN(heightInM) || isNaN(age)) {
+  console.log(`
+    Please make sure weight, height and age are numbers:
+    weight (kg) example: 82 | your input: ${process.argv[2]}
+    height (m) example 1.79 | your input: ${process.argv[3]}
+    age (years) example 32  | your input: ${process.argv[4]} 
+    $ node index.js 82 1.79 32 yes m
+  `);
+
+  process.exit();
+}
+
+if (age < 20) {
+  console.log(`
+    This BMI calculator was designed to be used by people older than 20
+    BMI is calculated differently for young people.
+    Please visit: https://en.wikipedia.org/wiki/Body_mass_index#Children_(aged_2_to_20)
+    For more information
+  `);
+
+  process.exit();
+}
+
+// check if weight is lower than 30 kg OR higher than 300 kg
+if (weightInKg < 30 || weightInKg > 300) {
+  console.log(`
+    Please enter a weight in kgs
+    
+    Your weight of ${weightInKg} kgs does not fall in the range between 30 kg and 300 kg
+    If you weight is below 30 kg or over 300 kg seek professional medical help
+  `);
+
+  process.exit();
+}
+
+// check wether dailyExercise was answered with "yes" or "no"
+if (dailyExercise !== "yes" && dailyExercise !== "no") {
+  console.log(`
+    Please specify wether you exercise daily with yes or no
+    You entered: ${dailyExercise}
+    (Don't worry, we won't judge you if you enter no)
+  `);
+
+  process.exit();
+}
 
 // The formula for BMI is: weight (kg) / (height (m) x height (m))
 var BMI = weightInKg / (heightInM * heightInM);

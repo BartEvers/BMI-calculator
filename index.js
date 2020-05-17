@@ -28,24 +28,33 @@ var dietWeeks = weightToLoseKg / 0.5;
 var dietCalories = dailyCalories - 500;
 
 console.log(`
+	
 **************
 BMI CALCULATOR
 **************
+
 age: ${age} years
 height: ${heightInM} m
 weight: ${weightInKg} kg
+
 ****************
 FACING THE FACTS
 ****************
+
 Your BMI is ${Math.round(BMI)}
+
 A BMI under 18.5 is considered underweight
 A BMI above 25 is considered overweight
+
 Your ideal weight is ${Math.round(idealWeightKg)} kg
 With a normal lifestyle you burn ${Math.round(dailyCalories)} calories a day
+
 **********
 DIET PLAN
 **********
+
 If you want to reach your ideal weight of ${Math.round(idealWeightKg)} kg:
+
 Eat ${Math.round(dietCalories)} calories a day
 For ${Math.round(dietWeeks)} weeks
 `);

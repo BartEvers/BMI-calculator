@@ -1,5 +1,7 @@
-var weightInKg = 82;
-var heightInM = 1.79;
+// console.log("What does process.argv contain?", process.argv);
+
+var weightInKg = parseInt(process.argv[2]);
+var heightInM = parseFloat(process.argv[3]);
 
 // The formula for BMI is: weight (kg) / (height (m) x height (m))
 var BMI = weightInKg / (heightInM * heightInM);

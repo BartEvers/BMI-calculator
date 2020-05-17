@@ -4,6 +4,7 @@ var weightInKg = parseInt(process.argv[2]);
 var heightInM = parseFloat(process.argv[3]);
 var age = parseInt(process.argv[4]);
 var dailyExercise = process.argv[5];
+var gender = process.argv[6];
 
 // The formula for BMI is: weight (kg) / (height (m) x height (m))
 var BMI = weightInKg / (heightInM * heightInM);
@@ -14,7 +15,17 @@ var idealWeightKg = 22.5 * heightInM * heightInM;
 
 // The formula for Basal Metabolic Rate (BMR) is: 10 x weight (kg) + 6.25 x height (cm) - 5 x age
 var heightInCm = heightInM * 100;
-var BMR = 10 * weightInKg + 6.25 * heightInCm - 5 * age;
+
+// Assumption: You are either male or female
+
+// Declaring a variable, but not assigning it yet, the value will depend on wether someone is "m" or "f"!
+var BMR;
+
+if (gender === "m") {
+  BMR = 10 * weightInKg + 6.25 * heightInCm - 5 * age + 50;
+} else {
+  BMR = 10 * weightInKg + 6.25 * heightInCm - 5 * age - 150;
+}
 
 // Assumption: calories for a normal lifestyle is BMR * 1.4
 // Assumption: calories for a active lifestyle is BMR * 1.6
@@ -43,6 +54,7 @@ console.log(`
 BMI CALCULATOR
 **************
 age: ${age} years
+gender: ${gender}
 height: ${heightInM} m
 weight: ${weightInKg} kg
 do you exercise daily? ${dailyExercise}

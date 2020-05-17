@@ -40,14 +40,24 @@ if (dailyExercise === "yes") {
   dailyCalories = BMR * 1.4;
 }
 
-// Assumption: This app is built for people who weigh too much
 var weightToLoseKg = weightInKg - idealWeightKg;
 
-// Assumption: we can lose 0.5 kg a week
-var dietWeeks = weightToLoseKg / 0.5;
+// Assumption: we can lose or gain 0.5 kg a week
+// Using Math.abs to make dietWeeks a positive number
+var dietWeeks = Math.abs(weightToLoseKg / 0.5);
 
 // Assumption: to lose 0.5 kg a week we need to cut calorie intake by 500 calories
-var dietCalories = dailyCalories - 500;
+// Assumption: to lgain 0.5 kg a week we need to increase calorie intake by 500 calories
+
+// Declaring a variable, but not assigning it yet
+// the value will depend on wether someone needs to lose or gain weight
+var dietCalories;
+
+if (weightToLoseKg > 0) {
+  dietCalories = dailyCalories - 500;
+} else {
+  dietCalories = dailyCalories + 500;
+}
 
 console.log(`
 **************
